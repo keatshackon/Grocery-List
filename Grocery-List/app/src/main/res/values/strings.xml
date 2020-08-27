@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Grocery List</string>
+    <string name="enter_a_item">Enter a item</string>
+    <string name="enter_weight">Enter weight</string>
+    <string name="add">ADD</string>
+    <string name="serial_number">12</string>
+    <string name="items_list">Item 1</string>
+    <string name="_23_kg">23 kg</string>
+    <string name="keats">KEATS</string>
+    <string name="id">keats PVT LTD \nCopyright © 2020</string>
+</resources>
