@@ -50,7 +50,7 @@
             android:background="@drawable/list_item_selector"
             android:text="@string/add"
             android:textStyle="bold"
-            android:textColor="@color/splash_color"
+            android:textColor="@android:color/white"
             android:onClick="addToGroceryList"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Inverse"/>
 
@@ -61,6 +61,7 @@
         android:id="@+id/all_grocery_list_view"
         android:layout_margin="8dp"
         android:layout_width="match_parent"
+        android:background="@drawable/border"
         android:layout_height="match_parent" />
 
 
