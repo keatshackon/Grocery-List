@@ -38,15 +38,17 @@ public class GroceryListAdapter extends RecyclerView.Adapter<GroceryListAdapter.
         if (!(mCursor.moveToPosition(position))) return;
 
         String itemName = mCursor.getString(mCursor.getColumnIndex(GrocerylistContract.GrocerylistEntry.COLUMN_ITEM_NAME));
+        String measure = mCursor.getString(mCursor.getColumnIndex(GrocerylistContract.GrocerylistEntry.COLUMN_MEASURE));
         float weight = mCursor.getFloat(mCursor.getColumnIndex(GrocerylistContract.GrocerylistEntry.COLUMN_WEIGHT));
         int sNumber = position + 1;
+        measure = " "+measure;
 
         long id =mCursor.getLong(mCursor.getColumnIndex(GrocerylistContract.GrocerylistEntry._ID));
 
         holder.itemView.setTag(id);
 
         holder.itemName.setText(itemName);
-        holder.weight.setText(String.valueOf(weight));
+        holder.weight.setText(String.valueOf(weight) + measure);
         holder.sNumber.setText(String.valueOf(sNumber));
 
 

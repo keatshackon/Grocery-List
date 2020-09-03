@@ -11,28 +11,41 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.keatssalazar.waitlist.data.GrocerylistContract;
 import com.keatssalazar.waitlist.data.GrocerylistDbHelper;
 import com.keatssalazar.waitlist.data.TestUtil;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.zip.GZIPOutputStream;
+
+public class MainActivity extends AppCompatActivity  implements AdapterView.OnItemSelectedListener {
 
     private GroceryListAdapter mAdapter;
     private SQLiteDatabase mDb;
     private EditText mNewItem;
     private EditText mNewWeight;
+    private Spinner mSpinner;
+    private String mWeightMeasure;
+    private LinearLayout mLayout;
+    private RecyclerView gRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView gRecyclerView = findViewById(R.id.all_grocery_list_view);
+        gRecyclerView = findViewById(R.id.all_grocery_list_view);
         mNewItem = findViewById(R.id.item_name_edit_text);
         mNewWeight = findViewById(R.id.weight_edit_text);
+        mSpinner = findViewById(R.id.spinner);
+        mLayout = findViewById(R.id.empty);
 
         gRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         gRecyclerView.setHasFixedSize(true);
@@ -42,11 +55,25 @@ public class MainActivity extends AppCompatActivity {
         mDb = dbHelper.getWritableDatabase();
 
 
+        mSpinner.setOnItemSelectedListener(this);
         Cursor mCursor = getAllItem();
 
-        mAdapter = new GroceryListAdapter(this, mCursor);
+
+
+        if(mCursor.moveToFirst()){
+            gRecyclerView.setVisibility(View.VISIBLE);
+            mLayout.setVisibility(View.GONE);
+            mAdapter = new GroceryListAdapter(this, mCursor);
+
+        }else{
+            mLayout.setVisibility(View.VISIBLE);
+            gRecyclerView.setVisibility(View.GONE);
+        }
 
         gRecyclerView.setAdapter(mAdapter);
+
+
+
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -59,8 +86,17 @@ public class MainActivity extends AppCompatActivity {
                 long id = (long) viewHolder.itemView.getTag();
 
                 removeGuest(id);
+                if(getAllItem().moveToFirst()){
+                    gRecyclerView.setVisibility(View.VISIBLE);
+                    mLayout.setVisibility(View.GONE);
+                    mAdapter.swapCursor(getAllItem());
+                }else {
 
-                mAdapter.swapCursor(getAllItem());
+                    mLayout.setVisibility(View.VISIBLE);
+                    gRecyclerView.setVisibility(View.GONE);
+
+                }
+
 
             }
         }).attachToRecyclerView(gRecyclerView);
@@ -83,7 +119,16 @@ public class MainActivity extends AppCompatActivity {
 
         addNewItem(item, weight);
 
-        mAdapter.swapCursor(getAllItem());
+        if(getAllItem().moveToFirst()){
+            gRecyclerView.setVisibility(View.VISIBLE);
+            mLayout.setVisibility(View.GONE);
+            mAdapter.swapCursor(getAllItem());
+        }else {
+            mLayout.setVisibility(View.VISIBLE);
+            gRecyclerView.setVisibility(View.GONE);
+        }
+
+
 
         mNewWeight.clearFocus();
         mNewItem.getText().clear();
@@ -95,6 +140,8 @@ public class MainActivity extends AppCompatActivity {
         ContentValues cv = new ContentValues();
         cv.put(GrocerylistContract.GrocerylistEntry.COLUMN_ITEM_NAME, item);
         cv.put(GrocerylistContract.GrocerylistEntry.COLUMN_WEIGHT, weight);
+        cv.put(GrocerylistContract.GrocerylistEntry.COLUMN_MEASURE, mWeightMeasure);
+
 
         return mDb.insert(GrocerylistContract.GrocerylistEntry.TABLE_NAME, null, cv);
 
@@ -113,5 +160,21 @@ public class MainActivity extends AppCompatActivity {
                 null,
                 null,
                 GrocerylistContract.GrocerylistEntry.COLUMN_TIMESTAMP);
+    }
+
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        mWeightMeasure = parent.getSelectedItem().toString();
+        if(mWeightMeasure.equals("In Gram")){
+            mWeightMeasure = "gm";
+        }else if(mWeightMeasure.equals("In KiloGram")){
+            mWeightMeasure = "kg";
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

@@ -7,5 +7,14 @@
     <string name="items_list">Item 1</string>
     <string name="_23_kg">23 kg</string>
     <string name="keats">KEATS</string>
-    <string name="id">keats PVT LTD \nCopyright © 2020</string>
+    <string name="id">KEATS PVT LTD \nCopyright © 2020</string>
+    <string name="no_item_add_one">No Item, Add One!</string>
+
+
+    <string-array name="Spinner_item">
+
+        <item>In Gram</item>
+        <item>In KiloGram</item>
+
+    </string-array>
 </resources>

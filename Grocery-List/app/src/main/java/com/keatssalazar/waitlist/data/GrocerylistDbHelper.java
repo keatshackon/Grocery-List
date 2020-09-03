@@ -26,6 +26,7 @@ public class GrocerylistDbHelper extends SQLiteOpenHelper {
                 GrocerylistEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 GrocerylistEntry.COLUMN_ITEM_NAME + " TEXT NOT NULL, " +
                 GrocerylistEntry.COLUMN_WEIGHT + " REAL NOT NULL," +
+                GrocerylistEntry.COLUMN_MEASURE + " TEXT NOT NULL, " +
                 GrocerylistEntry.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
                 "); ";
 

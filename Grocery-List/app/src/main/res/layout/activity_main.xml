@@ -3,10 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="8dp"
     android:orientation="vertical"
-    tools:context=".MainActivity"
-    android:layout_margin="8dp">
-
+    tools:context=".MainActivity">
 
 
     <LinearLayout
@@ -20,49 +19,97 @@
             android:id="@+id/item_name_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:autofillHints="No"
+            android:background="@drawable/border"
             android:hint="@string/enter_a_item"
             android:inputType="textCapWords|text"
             android:maxLength="25"
-            android:padding="10dp"
             android:maxLines="1"
-            android:layout_marginBottom="2dp"
-            android:background="@drawable/border"
-            android:autofillHints="No"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+            android:padding="10dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-        <EditText
-            android:id="@+id/weight_edit_text"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/enter_weight"
-            android:padding="10dp"
-            android:maxLines="1"
-            android:layout_marginTop="2dp"
-            android:background="@drawable/border"
-            android:maxLength="7"
-            android:inputType="numberDecimal"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <EditText
+                android:id="@+id/weight_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1.8"
+                android:background="@drawable/border"
+                android:hint="@string/enter_weight"
+                android:inputType="numberDecimal"
+                android:maxLength="3"
+                android:maxLines="1"
+                android:padding="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="0dp"
+                android:layout_weight="1.2"
+                android:layout_height="46dp"
+                android:layout_marginTop="2dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:padding="10dp"
+                android:background="@drawable/border"
+                android:entries="@array/Spinner_item" />
+
+        </LinearLayout>
+
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/list_item_selector"
-            android:text="@string/add"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
             android:onClick="addToGroceryList"
-            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Inverse"/>
+            android:text="@string/add"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Inverse"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
 
 
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/all_grocery_list_view"
-        android:layout_margin="8dp"
         android:layout_width="match_parent"
-        android:background="@drawable/border"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:background="@drawable/border" />
+
+    <LinearLayout
+        android:id="@+id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/fire"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="@string/no_item_add_one"
+            android:textColor="@color/colorPrimary"/>
+
+
+    </LinearLayout>
 
 
 </LinearLayout>

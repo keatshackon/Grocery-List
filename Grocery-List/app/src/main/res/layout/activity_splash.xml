@@ -44,7 +44,7 @@
         android:letterSpacing="0.1"
         android:text="@string/id"
         android:textColor="@color/splash_text"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
