@@ -14,7 +14,6 @@ public class GrocerylistDbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "grocerylist.db";
     private static final int DATABASE_VERSION = 1;
 
-
     public GrocerylistDbHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }

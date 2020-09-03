@@ -42,7 +42,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
 
-        new CountDownTimer(1000, 1000) {
+        new CountDownTimer(3000, 1000) {
 
             /** This method will be invoked on finishing or expiring the timer */
             @Override
@@ -63,8 +63,6 @@ public class SplashActivity extends AppCompatActivity {
                 mAnim2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.translation);
                 mFire.startAnimation(mAnim1);
                 mKeats.startAnimation(mAnim2);
-
-
 
             }
         }.start();
