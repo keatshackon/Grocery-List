@@ -15,6 +15,7 @@
 
         <item>In Gram</item>
         <item>In KiloGram</item>
+        <item>No. of pkt</item>
 
     </string-array>
 </resources>

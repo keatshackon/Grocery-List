@@ -34,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
-            android:layout_weight="60"
+            android:layout_weight="58"
             android:fontFamily="sans-serif-black"
             android:maxLength="25"
             android:text="@string/items_list"
@@ -51,10 +51,10 @@
             android:layout_marginEnd="3dp"
             android:layout_weight="25"
             android:fontFamily="sans-serif-black"
-            android:maxLength="8"
+            android:maxLength="9"
             android:padding="5dp"
             android:text="@string/_23_kg"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             tools:text="300 kg" />
 

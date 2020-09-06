@@ -160,6 +160,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             mWeightMeasure = "gm";
         } else if (mWeightMeasure.equals("In KiloGram")) {
             mWeightMeasure = "kg";
+        } else if(mWeightMeasure.equals("No. of pkt")){
+            mWeightMeasure = "pkt";
         }
     }
 
