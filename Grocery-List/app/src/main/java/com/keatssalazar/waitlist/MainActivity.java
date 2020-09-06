@@ -25,6 +25,8 @@ import com.keatssalazar.waitlist.data.TestUtil;
 
 import java.util.zip.GZIPOutputStream;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
+
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private GroceryListAdapter mAdapter;
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         GrocerylistDbHelper dbHelper = new GrocerylistDbHelper(this);
 
         mDb = dbHelper.getWritableDatabase();
+        mAdapter = new GroceryListAdapter(this);
 
         mSpinner.setOnItemSelectedListener(this);
         Cursor mCursor = getAllItem();
@@ -109,16 +112,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         float weight = Float.parseFloat(mNewWeight.getText().toString());
 
 
-        addNewItem(item, weight);
+        long done = addNewItem(item, weight);
 
-        if (getAllItem().moveToFirst()) {
-            gRecyclerView.setVisibility(View.VISIBLE);
-            mLayout.setVisibility(View.GONE);
-            mAdapter.swapCursor(getAllItem());
-        } else {
+        if(done != -1){
+            if (getAllItem().moveToFirst()) {
+                gRecyclerView.setVisibility(View.VISIBLE);
+                mLayout.setVisibility(View.GONE);
+                mAdapter.swapCursor(getAllItem());
+            }
+        }else {
             mLayout.setVisibility(View.VISIBLE);
             gRecyclerView.setVisibility(View.GONE);
         }
+
 
 
         mNewWeight.clearFocus();

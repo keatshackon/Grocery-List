@@ -22,6 +22,9 @@ public class GroceryListAdapter extends RecyclerView.Adapter<GroceryListAdapter.
         this.mContext = context;
         this.mCursor = cursor;
     }
+    public GroceryListAdapter(Context context) {
+        this.mContext = context;
+    }
 
 
     @NonNull
